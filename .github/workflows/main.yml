@@ -1,0 +1,21 @@
+name: Sync Leetcode
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 16 * * *" #  凌晨時間 00:00
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Sync
+      uses: joshcai/leetcode-sync@v1.7
+      with:
+        github-token: ${{ github.token }}
+        leetcode-csrf-token: ${{ secrets.LEETCODE_CSRF_TOKEN }}
+        leetcode-session: ${{ secrets.LEETCODE_SESSION }}
+        verbose: true
